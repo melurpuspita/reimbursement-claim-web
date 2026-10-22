@@ -1,0 +1,8 @@
+INSERT OR IGNORE INTO users (id,email,name,role,password_hash) VALUES (1,'dewi@ops.test','Dewi','admin','pbkdf2$100000$BwcHBwcHBwcHBwcHBwcHBw==$RRO1jNBopG/b98/llqxsC1NoQhCZzrUgRaJuR3jKcHA=');
+INSERT OR IGNORE INTO users (id,email,name,role,password_hash) VALUES (2,'rina@ops.test','Rina','sales','pbkdf2$100000$BwcHBwcHBwcHBwcHBwcHBw==$RRO1jNBopG/b98/llqxsC1NoQhCZzrUgRaJuR3jKcHA=');
+INSERT OR IGNORE INTO users (id,email,name,role,password_hash) VALUES (3,'budi@ops.test','Budi','sales','pbkdf2$100000$BwcHBwcHBwcHBwcHBwcHBw==$RRO1jNBopG/b98/llqxsC1NoQhCZzrUgRaJuR3jKcHA=');
+INSERT OR IGNORE INTO tokens (id,user_id,token_hash,label) VALUES (1,2,'3b57b9630c0f0813691d373e83ef17c4d369767cb1a175de19932fa26d5b0778','Claude Code Rina (dummy)');
+INSERT OR IGNORE INTO tokens (id,user_id,token_hash,label) VALUES (2,3,'5087bdae00952e711807118ae4f55e179f8b6909f2d6b3919da1f37932e593f9','Claude Code Budi (dummy)');
+INSERT OR IGNORE INTO claims (id,user_id,merchant,amount_idr,spent_on,category,description,status,source) VALUES (1,2,'Warung Kopi Kuntilanak',85000,'2026-10-19','makan','Kopi tubruk bareng klien di sela demo produk','pending','web');
+INSERT OR IGNORE INTO claims (id,user_id,merchant,amount_idr,spent_on,category,description,status,source) VALUES (2,3,'Ojek Pocong Express',245000,'2026-10-20','transport','Ojek ke kantor klien di Bekasi, pulang pergi','pending','web');
+INSERT OR IGNORE INTO claims (id,user_id,merchant,amount_idr,spent_on,category,description,status,decision_note,decided_by,decided_at,source) VALUES (3,2,'Parkir Mall Gentayangan',15000,'2026-10-18','parkir','Parkir saat meeting vendor','approved','Aman, arwah tenang',1,'2026-10-19 09:00:00','web');

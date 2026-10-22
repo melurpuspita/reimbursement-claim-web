@@ -1,0 +1,34 @@
+{
+  "name": "web-claim",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run --config vitest.config.mts && vitest run --config vitest.mcp.config.mts",
+    "dev": "npm run db:setup && wrangler dev",
+    "db:setup": "wrangler d1 migrations apply DB --local && wrangler d1 execute DB --local --file=seed.sql",
+    "db:reset": "rm -rf .wrangler/state && npm run db:setup",
+    "seed:gen": "tsx scripts/make-seed.ts",
+    "mcp": "tsx mcp/server.ts",
+    "typecheck": "tsc --noEmit",
+    "deploy": "wrangler deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hono": "^4.13.13"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.23.0",
+    "@cloudflare/workers-types": "^5.20261022.1",
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "@types/node": "^22.20.5",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.12",
+    "wrangler": "^4.151.3",
+    "zod": "^4.6.7"
+  },
+  "type": "module"
+}

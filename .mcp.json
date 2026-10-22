@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "ops-finance": {
+      "command": "npx",
+      "args": ["tsx", "mcp/server.ts"],
+      "env": {
+        "OPS_API_URL": "http://localhost:8787",
+        "OPS_API_TOKEN": "opsf_dummy_rina_0000000000000001",
+        "OPS_RECEIPTS_DIR": "./receipts"
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "web-claim",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": { "directory": "./public", "binding": "ASSETS", "run_worker_first": true },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "web-claim-db", "database_id": "local-dummy-id", "migrations_dir": "migrations" }
+  ],
+  "r2_buckets": [{ "binding": "RECEIPTS", "bucket_name": "web-claim-receipts" }]
+}

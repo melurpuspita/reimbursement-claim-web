@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HantuKlaim - Masuk</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%91%BB%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Creepster&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/app.css">
+</head>
+<body>
+  <div class="moon"></div>
+  <main class="login-wrap">
+    <form class="login-card" id="form" autocomplete="on">
+      <div class="login-mascots" id="mascots"></div>
+      <div class="logo">HantuKlaim</div>
+      <p class="tagline">Klaim biaya Tim Ops Sales, anti gentayangan.</p>
+      <label for="email">Email</label>
+      <input id="email" type="email" required autocomplete="username" placeholder="rina@ops.test">
+      <label for="password">Password</label>
+      <input id="password" type="password" required autocomplete="current-password" placeholder="Rahasia, jangan dibisikin ke pocong">
+      <p class="error" id="err" role="alert"></p>
+      <button class="btn orange" style="width:100%;font-size:19px" type="submit">Masuk ke alam klaim</button>
+      <div class="demo">
+        <b>Akun demo</b> <span class="muted small">(semua data dummy, password: pocong123)</span>
+        <div class="chips" id="demo"></div>
+      </div>
+    </form>
+  </main>
+  <script src="/assets/mascots.js"></script>
+  <script src="/assets/fx.js"></script>
+  <script>
+    document.getElementById("mascots").innerHTML = Mascots.pocong({ w: 70, h: 105 }) + Mascots.kuntilanak({ w: 70, h: 105 });
+    FX.ambient(); FX.soundButton();
+    const demo = [["Dewi (admin finance)", "dewi@ops.test"], ["Rina (sales)", "rina@ops.test"], ["Budi (sales)", "budi@ops.test"]];
+    const chips = document.getElementById("demo");
+    for (const [label, mail] of demo) {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "btn ghost"; b.style.padding = "4px 12px"; b.textContent = label;
+      b.onclick = () => { email.value = mail; password.value = "pocong123"; FX.Sfx.play("click"); };
+      chips.appendChild(b);
+    }
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault(); err.textContent = "";
+      const res = await fetch("/api/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: email.value, password: password.value }) });
+      if (res.ok) {
+        FX.Sfx.play("boo");
+        const boo = document.createElement("div"); boo.className = "boo"; boo.textContent = "BOO!"; document.body.appendChild(boo);
+        setTimeout(() => boo.classList.add("out"), 450);
+        setTimeout(() => (location.href = "/"), 800);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        err.textContent = (data.error || "Gagal masuk") + " (hantunya geleng-geleng)";
+        FX.shake(form); FX.Sfx.play("hit");
+      }
+    });
+  </script>
+</body>
+</html>
